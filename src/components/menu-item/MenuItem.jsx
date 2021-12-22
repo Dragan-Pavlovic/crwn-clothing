@@ -1,13 +1,13 @@
 import { useHistory } from "react-router-dom";
 import classes from "./MenuItem.module.scss";
 
-function MenuItem({ title, imageUrl, size, linkUrl }) {
+function MenuItem({ title, imageUrl, size, linkUrl, location }) {
   const history = useHistory();
   const formatedTitle = title.toUpperCase();
 
   const clickHandler = () => {
     history.push(linkUrl);
-  };
+  }; 
 
   return (
     <div
