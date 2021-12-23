@@ -1,43 +1,16 @@
-import { useReducer } from "react";
 import {
   signInWithFacebook,
   signInWithGoogle,
 } from "../../firebase/firebase.utils";
+import useFormInput from "../../hooks/useFormInput";
 import Button from "../UI/button/Button";
 import FormInput from "../UI/form-input/FormInput";
 import classes from "./SignIn.module.scss";
 
-const initialState = {
-  email: "",
-  password: "",
-};
-
-const signInReducer = (state, action) => {
-  switch (action.type) {
-    case "EMAIL-INPUT":
-      return { email: action.payload, password: state.password };
-
-    case "PASSWORD-INPUT":
-      return { email: state.email, password: action.payload };
-
-    case "CLEAR":
-      return { email: "", password: "" };
-
-    default:
-      return state;
-  }
-};
-
 const SignIn = () => {
-  const [{ email, password }, dispatch] = useReducer(
-    signInReducer,
-    initialState
-  );
-
-  const inputChangeHandler = (value, name) => {
-    dispatch({ type: `${name.toUpperCase()}-INPUT`, payload: value });
-  };
-
+  const { state, dispatch, inputChangeHandler } = useFormInput();
+  const { email, password } = state;
+  console.log("sign in renders");
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch({ type: "CLEAR" });
@@ -78,15 +51,14 @@ const SignIn = () => {
           >
             SIGN IN WITH GOOGLE
           </Button>
-
-          <Button
-            type="button"
-            className={classes["button-facebook"]}
-            onClick={signInWithFacebook}
-          >
-            LOGIN WITH FB
-          </Button>
         </div>
+        <Button
+          type="button"
+          className={classes["button-facebook"]}
+          onClick={signInWithFacebook}
+        >
+          LOGIN WITH FB
+        </Button>
       </form>
     </div>
   );

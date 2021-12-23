@@ -1,5 +1,5 @@
 import firebase from "firebase/compat/app";
-import "firebase/compat/database";
+import { doc, setDoc } from "firebase/compat/firestore";
 import {
   getAuth,
   GoogleAuthProvider,
@@ -17,6 +17,31 @@ const config = {
 };
 
 firebase.initializeApp(config);
+const firestore = firebase.firestore();
+
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+  try {
+    if (!userAuth) return;
+    const userRef = firestore.doc(`users/${userAuth.uid}`);
+    const snapShot = await userRef.get();
+
+    if (!snapShot.exists) {
+      const { displayName, email } = userAuth;
+      const createdAt = Date.now();
+
+      await userRef.set({
+        displayName,
+        email,
+        createdAt,
+        ...additionalData,
+      });
+    }
+
+    return userRef;
+  } catch (err) {
+    console.log(err.message);
+  }
+};
 
 export const database = firebase.database;
 
@@ -43,21 +68,18 @@ fbProvider.setCustomParameters({
 
 export const signInWithFacebook = () =>
   signInWithPopup(auth, fbProvider)
-    .then((result) => {
-      const credential = FacebookAuthProvider.credentialFromResult(result);
-      const token = credential.accessToken;
-      const user = result.user;
-      console.log(user);
-    })
+    .then((result) => {})
     .catch((error) => {
       // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      // The email of the user's account used.
-      const email = error.email;
-      // The AuthCredential type that was used.
-      const credential = FacebookAuthProvider.credentialFromError(error);
+      //   const errorCode = error.code;
+      //   const errorMessage = error.message;
+      //   // The email of the user's account used.
+      //   const email = error.email;
+      //   // The AuthCredential type that was used.
+      //   const credential = FacebookAuthProvider.credentialFromError(error);
       console.log(error);
       // ...
     });
 export default firebase;
+
+// console.log(firestore.collection("users"));
