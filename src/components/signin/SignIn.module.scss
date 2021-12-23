@@ -1,0 +1,29 @@
+.sign-in {
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    margin: 10px;
+  }
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+  .button-facebook {
+    background-color: rgb(66, 103, 178);
+
+    &:hover {
+      background-color: #898f9c;
+      border: none;
+    }
+  }
+  .button-google {
+    background-color: rgb(219, 68, 55);
+
+    &:hover {
+      background-color: #0f9d58;
+      border: none;
+    }
+  }
+}
