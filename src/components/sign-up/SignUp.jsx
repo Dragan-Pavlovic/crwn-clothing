@@ -8,7 +8,6 @@ import classes from "./SignUp.module.scss";
 const SignUp = () => {
   const { state, dispatch, inputChangeHandler } = useFormInput(true);
   const { email, password, confirmPassword, displayName } = state;
-  console.log("sign up renders");
   const submitHandler = async (e) => {
     e.preventDefault();
 

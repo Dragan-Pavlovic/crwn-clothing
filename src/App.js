@@ -8,14 +8,11 @@ import Shop from "./pages/shop/shop";
 import SignInAndSignUp from "./pages/sign-in-and-sign-up/SignInAndSignUp";
 
 function App() {
-  console.log("App rendered");
   const [user, setUser] = useState(null);
-
+  console.log(user);
   //
 
   useEffect(() => {
-    console.log("App-useEffect run");
-
     let unsubscribeUserSnaphot;
 
     let unsubscribeAuth = auth.onAuthStateChanged(async (userAuth) => {

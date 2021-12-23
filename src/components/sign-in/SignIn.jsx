@@ -2,6 +2,8 @@ import {
   signInWithFacebook,
   signInWithGoogle,
 } from "../../firebase/firebase.utils";
+import { auth } from "../../firebase/firebase.utils";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import useFormInput from "../../hooks/useFormInput";
 import Button from "../UI/button/Button";
 import FormInput from "../UI/form-input/FormInput";
@@ -10,9 +12,16 @@ import classes from "./SignIn.module.scss";
 const SignIn = () => {
   const { state, dispatch, inputChangeHandler } = useFormInput();
   const { email, password } = state;
-  console.log("sign in renders");
-  const submitHandler = (e) => {
+
+  const submitHandler = async (e) => {
     e.preventDefault();
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+    } catch (err) {
+      console.log(err);
+    }
+
     dispatch({ type: "CLEAR" });
   };
 
