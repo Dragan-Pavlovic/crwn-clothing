@@ -13,16 +13,18 @@
     background-color: rgb(66, 103, 178);
 
     &:hover {
-      background-color: #898f9c;
-      border: none;
+      background-color: white;
+      color: rgb(66, 103, 178);
+      border-color: rgb(66, 103, 178);
     }
   }
   .button-google {
     background-color: rgb(219, 68, 55);
 
     &:hover {
-      background-color: #0f9d58;
-      border: none;
+      background-color: white;
+      color: rgb(219, 68, 55);
+      border-color: rgb(219, 68, 55);
     }
   }
 }

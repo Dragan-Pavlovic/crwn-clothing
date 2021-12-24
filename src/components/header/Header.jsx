@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 import classes from "./Header.module.scss";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { auth } from "../../firebase/firebase.utils";
+import { useSelector } from "react-redux";
 
-export default function Header({ user }) {
+export default function Header() {
+  const currentUser = useSelector((state) => state.user.currentUser);
+
   const signOutHandler = () => {
     auth.signOut();
   };
@@ -17,7 +20,7 @@ export default function Header({ user }) {
           SHOP
         </Link>
 
-        {user ? (
+        {currentUser ? (
           <div className={classes.option} onClick={signOutHandler}>
             SIGN OUT
           </div>
