@@ -10,7 +10,7 @@ export default function CollectionPreview({ title, items }) {
       <div className={classes.preview}>
         {items.slice(0, 4).map(({ id, ...rest }) => {
           console.log("mapping");
-          return <CollectionItem key={id} {...rest} />;
+          return <CollectionItem key={id} id={id} {...rest} />;
         })}
       </div>
     </div>

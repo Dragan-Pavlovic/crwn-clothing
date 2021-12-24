@@ -1,13 +1,14 @@
 import classes from "./Button.module.scss";
 
-const Button = ({ children, className, ...otherProps }) => {
+const Button = ({ children, className, inverted, ...otherProps }) => {
+  const btnClasses = `${className ? className + " " : ""}${
+    inverted ? classes.inverted + " " : ""
+  }${classes["custom-button"]}`;
+
+  //
+
   return (
-    <button
-      className={`${className ? className + " " : ""}${
-        classes["custom-button"]
-      }`}
-      {...otherProps}
-    >
+    <button className={btnClasses} {...otherProps}>
       {children}
     </button>
   );
