@@ -15,6 +15,7 @@ function App() {
   const currentUser = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
   //
+  console.log(currentUser);
 
   useEffect(() => {
     const keyPressHandler = (e) => {

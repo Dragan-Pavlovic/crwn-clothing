@@ -8,15 +8,18 @@ const CartIcon = () => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
 
-  console.log(cartItems);
   const toggleShowCartHandler = () => {
     dispatch(cartActions.toggleCartHidden());
   };
 
+  const quantity = cartItems.reduce((acc, item) => {
+    return acc + +item.quantity;
+  }, 0);
+
   return (
     <div onClick={toggleShowCartHandler} className={classes["cart-icon"]}>
       <ShoppingIcon className={classes["shopping-icon"]} />
-      <span className={classes["item-count"]}>0</span>
+      <span className={classes["item-count"]}>{quantity}</span>
     </div>
   );
 };
