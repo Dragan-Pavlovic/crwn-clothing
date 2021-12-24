@@ -1,20 +1,32 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
 import Header from "./components/header/Header";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import HomePage from "./pages/HomePage/HomePage";
 import Shop from "./pages/shop/shop";
 import SignInAndSignUp from "./pages/sign-in-and-sign-up/SignInAndSignUp";
+import { cartActions } from "./Store/cartSlice";
 import { userActions } from "./Store/userSlice";
 
 function App() {
+  const { isHidden } = useSelector((state) => state.cart);
   const currentUser = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
   //
 
-  console.log(currentUser);
+  useEffect(() => {
+    const keyPressHandler = (e) => {
+      if (e.key?.toLowerCase() === "escape" && isHidden === false) {
+        dispatch(cartActions.toggleCartHidden());
+      }
+    };
+    document.addEventListener("keydown", keyPressHandler, false);
+    return () => {
+      document.removeEventListener("keydown", keyPressHandler, false);
+    };
+  }, [dispatch, isHidden]);
 
   useEffect(() => {
     let unsubscribeUserSnaphot;
@@ -46,7 +58,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
+    <div>
       <Header />
       <main>
         <Switch>
@@ -58,11 +70,12 @@ function App() {
           </Route>
 
           <Route path="/signin">
-            <SignInAndSignUp />
+            {currentUser && <Redirect to="/" />}
+            {!currentUser && <SignInAndSignUp />}
           </Route>
         </Switch>
       </main>
-    </>
+    </div>
   );
 }
 

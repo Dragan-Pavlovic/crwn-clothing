@@ -3,8 +3,11 @@ import classes from "./Header.module.scss";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { auth } from "../../firebase/firebase.utils";
 import { useSelector } from "react-redux";
+import CartIcon from "../cart-icon/CartIcon";
+import CartDropdown from "../cart-dropdown/CartDropdown";
 
 export default function Header() {
+  const isCartHidden = useSelector((state) => state.cart.isHidden);
   const currentUser = useSelector((state) => state.user.currentUser);
 
   const signOutHandler = () => {
@@ -29,10 +32,13 @@ export default function Header() {
             SIGN IN
           </Link>
         )}
+
         <Link className={classes.option} to="/contact">
           CONTACT
         </Link>
+        <CartIcon />
       </div>
+      {!isCartHidden && <CartDropdown />}
     </div>
   );
 }
