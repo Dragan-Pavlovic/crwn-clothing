@@ -6,7 +6,8 @@ import { useSelector } from "react-redux";
 import CartIcon from "../cart-icon/CartIcon";
 import CartDropdown from "../cart-dropdown/CartDropdown";
 
-export default function Header() {
+function Header() {
+  console.log("header run");
   const isCartHidden = useSelector((state) => state.cart.isHidden);
   const currentUser = useSelector((state) => state.user.currentUser);
 
@@ -42,3 +43,5 @@ export default function Header() {
     </div>
   );
 }
+
+export default Header;

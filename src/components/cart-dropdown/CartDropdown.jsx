@@ -1,10 +1,14 @@
+import React from "react";
 import classes from "./CartDropdown.module.scss";
 import Button from "../UI/button/Button";
 import CartItem from "../cart-item/CartItem";
 import { useSelector } from "react-redux";
+import { selectCartItems } from "../../Store/cartSlice";
 
 const CartDropdown = () => {
-  const { cartItems } = useSelector((state) => state.cart);
+  console.log("cart drpodown runn");
+  const cartItems = useSelector(selectCartItems);
+
   return (
     <div className={classes["cart-dropdown"]}>
       {!!cartItems.length && (
@@ -23,4 +27,4 @@ const CartDropdown = () => {
   );
 };
 
-export default CartDropdown;
+export default React.memo(CartDropdown);

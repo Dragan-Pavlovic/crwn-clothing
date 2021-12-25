@@ -11,11 +11,11 @@ import { cartActions } from "./Store/cartSlice";
 import { userActions } from "./Store/userSlice";
 
 function App() {
-  const { isHidden } = useSelector((state) => state.cart);
+  const isHidden = useSelector((state) => state.cart.isHidden);
   const currentUser = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
   //
-  console.log(currentUser);
+  console.log("App Run");
 
   useEffect(() => {
     const keyPressHandler = (e) => {
