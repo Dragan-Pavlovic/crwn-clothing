@@ -17,11 +17,9 @@
     flex-direction: column;
     overflow: auto;
   }
-  p {
-    display: flex;
-    justify-content: center;
-    font-size: 12;
-    font-weight: 20;
+  .empty-message {
+    font-size: 18px;
+    margin: 50px auto;
   }
   button {
     margin-top: 10px;

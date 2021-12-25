@@ -5,11 +5,13 @@ import { auth } from "../../firebase/firebase.utils";
 import { useSelector } from "react-redux";
 import CartIcon from "../cart-icon/CartIcon";
 import CartDropdown from "../cart-dropdown/CartDropdown";
+import { selectUser } from "../../Store/user-slice/userSelectors";
+import { selectIsDropdownHidden } from "../../Store/cart-slice/cartSeletors";
 
 function Header() {
   console.log("header run");
-  const isCartHidden = useSelector((state) => state.cart.isHidden);
-  const currentUser = useSelector((state) => state.user.currentUser);
+  const isCartHidden = useSelector(selectIsDropdownHidden);
+  const currentUser = useSelector(selectUser);
 
   const signOutHandler = () => {
     auth.signOut();

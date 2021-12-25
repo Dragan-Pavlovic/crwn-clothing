@@ -3,11 +3,17 @@ import classes from "./CartDropdown.module.scss";
 import Button from "../UI/button/Button";
 import CartItem from "../cart-item/CartItem";
 import { useSelector } from "react-redux";
-import { selectCartItems } from "../../Store/cartSlice";
+import { selectCartItems } from "../../Store/cart-slice/cartSeletors";
+import { useHistory } from "react-router-dom";
 
 const CartDropdown = () => {
   console.log("cart drpodown runn");
   const cartItems = useSelector(selectCartItems);
+  const history = useHistory();
+
+  const goToCheckoutHandler = () => {
+    history.push("/checkout");
+  };
 
   return (
     <div className={classes["cart-dropdown"]}>
@@ -18,11 +24,13 @@ const CartDropdown = () => {
               <CartItem key={id} {...other} />
             ))}
           </div>
-          <Button>GO TO CHECKOUT</Button>{" "}
+          <Button onClick={goToCheckoutHandler}>GO TO CHECKOUT</Button>{" "}
         </>
       )}
 
-      {!!!cartItems.length && <p>Cart is empty!</p>}
+      {!!!cartItems.length && (
+        <span className={classes["empty-message"]}>Cart is empty!</span>
+      )}
     </div>
   );
 };
