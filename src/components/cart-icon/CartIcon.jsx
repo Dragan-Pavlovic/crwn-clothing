@@ -10,8 +10,6 @@ const CartIcon = () => {
   const dispatch = useDispatch();
   const quantity = useSelector(selectQuantity);
 
-  console.log("cartIcon rendered");
-
   const toggleShowCartHandler = () => {
     dispatch(cartActions.toggleCartHidden());
   };
@@ -24,4 +22,4 @@ const CartIcon = () => {
   );
 };
 
-export default React.memo(CartIcon);
+export default CartIcon;

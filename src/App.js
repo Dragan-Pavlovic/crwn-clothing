@@ -18,7 +18,6 @@ function App() {
   const dispatch = useDispatch();
   const history = useHistory();
   //
-  console.log("App Run");
 
   useEffect(() => {
     const keyPressHandler = (e) => {
@@ -73,6 +72,7 @@ function App() {
   return (
     <div>
       <Header />
+      <h1>Dragan</h1>
       <main>
         <Switch>
           <Route exact path="/">

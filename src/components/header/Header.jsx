@@ -9,7 +9,6 @@ import { selectUser } from "../../Store/user-slice/userSelectors";
 import { selectIsDropdownHidden } from "../../Store/cart-slice/cartSeletors";
 
 function Header() {
-  console.log("header run");
   const isCartHidden = useSelector(selectIsDropdownHidden);
   const currentUser = useSelector(selectUser);
 

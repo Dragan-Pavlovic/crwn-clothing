@@ -7,7 +7,6 @@ import { selectCartItems } from "../../Store/cart-slice/cartSeletors";
 import { useHistory } from "react-router-dom";
 
 const CartDropdown = () => {
-  console.log("cart drpodown runn");
   const cartItems = useSelector(selectCartItems);
   const history = useHistory();
 
@@ -35,4 +34,4 @@ const CartDropdown = () => {
   );
 };
 
-export default React.memo(CartDropdown);
+export default CartDropdown;
