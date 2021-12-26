@@ -72,7 +72,7 @@ function App() {
   return (
     <div>
       <Header />
-      <h1>Dragan</h1>
+
       <main>
         <Switch>
           <Route exact path="/">
