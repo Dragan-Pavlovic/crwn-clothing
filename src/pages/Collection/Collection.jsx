@@ -4,11 +4,14 @@ import CollectionItem from "../../components/collection-item/CollectionItem";
 import { selectCollecton } from "../../Store/collections-slice/collectionsSelectors";
 import classes from "./Collection.module.scss";
 
-const Category = () => {
+const Collection = () => {
   const { collectionId } = useParams();
   const collectionSelector = selectCollecton(collectionId);
   const collection = useSelector(collectionSelector);
-  const { title, items } = collection;
+
+  const title = collection?.title || collectionId;
+  const items = collection?.items || [];
+
   return (
     <div className={classes["collection-page"]}>
       <h2 className={title}>{title}</h2>
@@ -22,4 +25,4 @@ const Category = () => {
   );
 };
 
-export default Category;
+export default Collection;

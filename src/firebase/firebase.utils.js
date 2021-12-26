@@ -17,7 +17,7 @@ const config = {
 };
 
 firebase.initializeApp(config);
-const firestore = firebase.firestore();
+export const firestore = firebase.firestore();
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   try {
@@ -43,7 +43,50 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   }
 };
 
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  try {
+    const collectionRef = firestore.collection(collectionKey);
+
+    const batch = firestore.batch();
+
+    for (let key of Object.keys(objectsToAdd)) {
+      const newDocRef = collectionRef.doc();
+      const objectToAdd = {
+        title: objectsToAdd[key].title,
+        items: objectsToAdd[key].items,
+      };
+      batch.set(newDocRef, objectToAdd);
+    }
+
+    return await batch.commit();
+  } catch (err) {
+    console.log(err.message);
+  }
+};
+
 export const database = firebase.database;
+
+export const convertCollectionsSnapshotToMap = (collections) => {
+  const transformedCollection = collections.docs.map((doc) => {
+    const { title, items } = doc.data();
+
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items,
+    };
+  });
+
+  return transformedCollection.reduce((acc, collection) => {
+    const collectionName = collection.title.toLowerCase();
+    acc[collectionName] = collection;
+    return acc;
+  }, {});
+};
 
 const googleProvider = new GoogleAuthProvider();
 // googleProvider.addScope("https://www.googleapis.com/auth/contacts.readonly");

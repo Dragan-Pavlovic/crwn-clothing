@@ -9,35 +9,16 @@ import Checkout from "./pages/Checkout/Checkout";
 import HomePage from "./pages/HomePage/HomePage";
 import Shop from "./pages/shop/shop";
 import SignInAndSignUp from "./pages/sign-in-and-sign-up/SignInAndSignUp";
+import { selectIsDropdownHidden } from "./Store/cart-slice/cartSeletors";
 import { cartActions } from "./Store/cart-slice/cartSlice";
+import { selectUser } from "./Store/user-slice/userSelectors";
 import { userActions } from "./Store/user-slice/userSlice";
 
 function App() {
-  const isHidden = useSelector((state) => state.cart.isHidden);
-  const currentUser = useSelector((state) => state.user.currentUser);
+  const currentUser = useSelector(selectUser);
   const dispatch = useDispatch();
-  const history = useHistory();
+
   //
-
-  useEffect(() => {
-    const keyPressHandler = (e) => {
-      if (e.key?.toLowerCase() === "escape" && isHidden === false) {
-        dispatch(cartActions.toggleCartHidden());
-      }
-    };
-    document.addEventListener("keydown", keyPressHandler, false);
-    return () => {
-      document.removeEventListener("keydown", keyPressHandler, false);
-    };
-  }, [dispatch, isHidden]);
-
-  useEffect(() => {
-    const unsubscribeHistory = history.listen((e) => {
-      if (!isHidden) dispatch(cartActions.toggleCartHidden());
-    });
-
-    return unsubscribeHistory;
-  }, [isHidden, dispatch, history]);
 
   useEffect(() => {
     //subscribe to firbase Auth
@@ -62,7 +43,6 @@ function App() {
     });
 
     //
-
     return () => {
       unsubscribeAuth();
       unsubscribeUserSnaphot();

@@ -7,10 +7,12 @@ const CollectionOverview = () => {
   const collections = useSelector(selectCollectons);
 
   let items = [];
-  for (let key of Object.keys(collections)) {
-    items.push(
-      <CollectionPreview key={collections[key].id} {...collections[key]} />
-    );
+  if (collections) {
+    for (let key of Object.keys(collections)) {
+      items.push(
+        <CollectionPreview key={collections[key].id} {...collections[key]} />
+      );
+    }
   }
 
   return <div className={classes["collection-overview"]}>{items}</div>;
