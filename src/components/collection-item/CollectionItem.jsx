@@ -3,7 +3,9 @@ import { cartActions } from "../../Store/cart-slice/cartSlice";
 import Button from "../UI/button/Button";
 import classes from "./CollectionItem.module.scss";
 
-export default function CollectionItem({ name, price, imageUrl, id }) {
+export default function CollectionItem(props) {
+  const { name, price, imageUrl, id, styling } = props;
+
   const dispatch = useDispatch();
   const formatedPrice = `$${price.toFixed(2)}`;
 
@@ -11,8 +13,10 @@ export default function CollectionItem({ name, price, imageUrl, id }) {
     dispatch(cartActions.addItemToCart({ id, name, price, imageUrl }));
   };
 
+  const styles = `${styling ? styling + " " : ""}${classes["collection-item"]}`;
+
   return (
-    <div className={classes["collection-item"]}>
+    <div className={styles}>
       <div
         className={classes.image}
         style={{ backgroundImage: `url(${imageUrl})` }}
