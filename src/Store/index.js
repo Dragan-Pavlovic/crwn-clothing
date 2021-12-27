@@ -2,6 +2,7 @@ import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { userReducer } from "./user-slice/userSlice";
 import { cartReducer } from "./cart-slice/cartSlice";
 import { directoryReducer } from "./directory-slice/directorySlice";
+import { collecionsReducer } from "./collections-slice/collectionsSlice";
 
 //redux persist
 import storage from "redux-persist/lib/storage";
@@ -18,7 +19,6 @@ import {
   REGISTER,
   REHYDRATE,
 } from "redux-persist";
-import { collecionsReducer } from "./collections-slice/collectionsSlice";
 
 const rootReducer = combineReducers({
   user: userReducer,

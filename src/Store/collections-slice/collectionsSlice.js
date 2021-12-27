@@ -4,7 +4,7 @@ const collectionsSlice = createSlice({
   name: "collection",
   initialState: null,
   reducers: {
-    updateCollections(state, action) {
+    updateCollections(_, action) {
       return { ...action.payload };
     },
   },

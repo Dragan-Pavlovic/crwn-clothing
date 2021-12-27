@@ -12,6 +12,9 @@ const cartSlice = createSlice({
     toggleCartHidden(state) {
       state.isHidden = !state.isHidden;
     },
+    hideCart(state) {
+      state.isHidden = true;
+    },
 
     addItemToCart(state, action) {
       const { id } = action.payload;

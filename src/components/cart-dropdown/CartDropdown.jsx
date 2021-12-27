@@ -28,9 +28,9 @@ const CartDropdown = () => {
         dispatch(cartActions.toggleCartHidden());
       }
     };
-    document.addEventListener("keypress", keyPressHandler, false);
+    document.addEventListener("keydown", keyPressHandler);
     return () => {
-      document.removeEventListener("keypress", keyPressHandler, false);
+      document.removeEventListener("keydown", keyPressHandler);
     };
   }, [dispatch, isHidden]);
 

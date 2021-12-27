@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import "./App.css";
 import Header from "./components/header/Header";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
@@ -9,7 +8,6 @@ import Checkout from "./pages/Checkout/Checkout";
 import HomePage from "./pages/HomePage/HomePage";
 import Shop from "./pages/shop/shop";
 import SignInAndSignUp from "./pages/sign-in-and-sign-up/SignInAndSignUp";
-import { selectIsDropdownHidden } from "./Store/cart-slice/cartSeletors";
 import { cartActions } from "./Store/cart-slice/cartSlice";
 import { selectUser } from "./Store/user-slice/userSelectors";
 import { userActions } from "./Store/user-slice/userSlice";
@@ -23,7 +21,7 @@ function App() {
   useEffect(() => {
     //subscribe to firbase Auth
     let unsubscribeUserSnaphot;
-
+    dispatch(cartActions.hideCart());
     let unsubscribeAuth = auth.onAuthStateChanged(async (userAuth) => {
       //
       if (userAuth) {
