@@ -5,7 +5,7 @@ import classes from "./CollectionOverview.module.scss";
 
 const CollectionOverview = () => {
   const collections = useSelector(selectCollectons);
-
+  console.log("rerender");
   let items = [];
   if (collections) {
     for (let key of Object.keys(collections)) {

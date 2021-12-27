@@ -27,14 +27,14 @@ const rootReducer = combineReducers({
   collections: collecionsReducer,
 });
 
-const persitConfig = {
+const persistConfig = {
   key: "root",
   version: 1,
   storage,
   whitelist: ["user", "cart"],
 };
 
-const persistedReducer = persistReducer(persitConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store = configureStore({
   reducer: persistedReducer,
