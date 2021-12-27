@@ -1,7 +1,10 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-const currentUser = (state) => state.user;
+const selectUserSlice = (state) => {
+  return state.user;
+};
 
-export const selectUser = createSelector(currentUser, (user) => {
-  return user.currentUser;
+export const selectUser = createSelector(selectUserSlice, (userSlice) => {
+  console.log("userSelector", userSlice.currentUser);
+  return userSlice.currentUser;
 });

@@ -1,1 +1,3 @@
-export const selectDirectory = (state) => state.directory;
+export const selectDirectory = (state) => {
+  return state.directory;
+};

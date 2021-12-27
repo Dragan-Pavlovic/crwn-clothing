@@ -15,7 +15,6 @@ import { userActions } from "./Store/user-slice/userSlice";
 function App() {
   const currentUser = useSelector(selectUser);
   const dispatch = useDispatch();
-
   //
 
   useEffect(() => {

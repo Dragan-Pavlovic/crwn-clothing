@@ -5,7 +5,6 @@ import classes from "./CollectionItem.module.scss";
 
 export default function CollectionItem(props) {
   const { name, price, imageUrl, id, styling } = props;
-
   const dispatch = useDispatch();
   const formatedPrice = `$${price.toFixed(2)}`;
 

@@ -1,11 +1,19 @@
 import { useSelector } from "react-redux";
-import { selectCollectons } from "../../Store/collections-slice/collectionsSelectors";
+import {
+  selectCollectionIsLoading,
+  selectCollections,
+} from "../../Store/collections-slice/collectionsSelectors";
 import CollectionPreview from "../collection-preview/CollectionPreview";
+import LoadingSpinner from "../loading-spinner/LoadingSpinner";
 import classes from "./CollectionOverview.module.scss";
 
 const CollectionOverview = () => {
-  const collections = useSelector(selectCollectons);
-  console.log("rerender");
+  const collections = useSelector(selectCollections);
+  const isLoading = useSelector(selectCollectionIsLoading);
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
   let items = [];
   if (collections) {
     for (let key of Object.keys(collections)) {
