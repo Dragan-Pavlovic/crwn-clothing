@@ -1,28 +1,35 @@
-import {
-  signInWithFacebook,
-  signInWithGoogle,
-} from "../../firebase/firebase.utils";
-import { auth } from "../../firebase/firebase.utils";
-import { signInWithEmailAndPassword } from "firebase/auth";
+// import {
+//   signInWithFacebook,
+//   signInWithGoogle,
+// } from "../../firebase/firebase.utils";
 import useFormInput from "../../hooks/useFormInput";
 import Button from "../UI/button/Button";
 import FormInput from "../UI/form-input/FormInput";
 import classes from "./SignIn.module.scss";
+import { useDispatch } from "react-redux";
+import { userActions } from "../../Store/user-slice/userSlice";
 
 const SignIn = () => {
-  const { state, dispatch, inputChangeHandler } = useFormInput();
+  const dispatch = useDispatch();
+  const {
+    state,
+    dispatch: dispatchUseFormAction,
+    inputChangeHandler,
+  } = useFormInput();
   const { email, password } = state;
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    dispatch(userActions.emailSignInStart({ ...state }));
+  };
 
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-    } catch (err) {
-      console.log(err);
-    }
+  const signInWithGoogleHandler = (e) => {
+    dispatch(userActions.googleSignInStart());
+    dispatchUseFormAction({ type: "CLEAR" });
+  };
 
-    dispatch({ type: "CLEAR" });
+  const signInWithFacebookHandler = () => {
+    console.log("facebook");
   };
 
   return (
@@ -40,7 +47,6 @@ const SignIn = () => {
           labelText="E-mail"
           labelHtmlFor="email"
         />
-
         <FormInput
           onChange={inputChangeHandler}
           type="password"
@@ -50,12 +56,13 @@ const SignIn = () => {
           labelText="Password"
           labelHtmlFor="password"
         />
+
         <div className={classes.buttons}>
           <Button type="submit">SIGN IN</Button>
 
           <Button
-            type="button"
-            onClick={signInWithGoogle}
+            // type="button"
+            onClick={signInWithGoogleHandler}
             className={classes["button-google"]}
           >
             SIGN IN WITH GOOGLE
@@ -64,7 +71,7 @@ const SignIn = () => {
         <Button
           type="button"
           className={classes["button-facebook"]}
-          onClick={signInWithFacebook}
+          onClick={signInWithFacebookHandler}
         >
           LOGIN WITH FB
         </Button>

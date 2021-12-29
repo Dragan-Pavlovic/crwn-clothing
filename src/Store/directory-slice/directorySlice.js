@@ -1,4 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+const images = `https://i.ibb.co/0s3pdnc/adidas-nmd.png
+https://i.ibb.co/dJbG1cT/yeezy.png
+`;
 
 const initialState = [
   {

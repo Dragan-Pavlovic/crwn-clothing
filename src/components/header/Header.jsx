@@ -7,13 +7,16 @@ import CartIcon from "../cart-icon/CartIcon";
 import CartDropdown from "../cart-dropdown/CartDropdown";
 import { selectUser } from "../../Store/user-slice/userSelectors";
 import { selectIsDropdownHidden } from "../../Store/cart-slice/cartSeletors";
+import { useDispatch } from "react-redux";
+import { userActions } from "../../Store/user-slice/userSlice";
 
 function Header() {
+  const dispatch = useDispatch();
   const isCartHidden = useSelector(selectIsDropdownHidden);
   const currentUser = useSelector(selectUser);
 
   const signOutHandler = () => {
-    auth.signOut();
+    dispatch(userActions.setCurrentUser(null));
   };
   return (
     <div className={classes.header}>

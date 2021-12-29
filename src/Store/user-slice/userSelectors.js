@@ -5,6 +5,5 @@ const selectUserSlice = (state) => {
 };
 
 export const selectUser = createSelector(selectUserSlice, (userSlice) => {
-  console.log("userSelector", userSlice.currentUser);
   return userSlice.currentUser;
 });

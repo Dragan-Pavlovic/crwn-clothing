@@ -2,10 +2,11 @@ import CollectionOverview from "../../components/collection-overview/CollectionO
 import { Route } from "react-router-dom/cjs/react-router-dom.min";
 import { useRouteMatch } from "react-router-dom";
 import Collection from "../Collection/Collection";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 import { useDispatch } from "react-redux";
 import { collectionsActions } from "../../Store/collections-slice/collectionsSlice";
+
 let initial = true;
 export default function Shop() {
   const dispatch = useDispatch();
@@ -13,11 +14,12 @@ export default function Shop() {
   useEffect(() => {
     if (initial) {
       console.log("fetching starts...");
-      dispatch(collectionsActions.fetchCollectionStartsAsync());
+      // dispatch(collectionsActions.fetchCollectionStartsAsync());
+      dispatch(collectionsActions.fetchCollectionsStarts());
       initial = false;
     }
   }, [dispatch]);
-
+  console.log("shoprenderd");
   return (
     <div>
       <Route exact path={`${match.path}`}>

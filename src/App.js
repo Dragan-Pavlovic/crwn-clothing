@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
@@ -16,34 +16,33 @@ function App() {
   const currentUser = useSelector(selectUser);
   const dispatch = useDispatch();
   //
-
+  console.log(currentUser);
+  console.log("app rerendered");
   useEffect(() => {
     //subscribe to firbase Auth
-    let unsubscribeUserSnaphot;
-    dispatch(cartActions.hideCart());
-    let unsubscribeAuth = auth.onAuthStateChanged(async (userAuth) => {
-      //
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-
-        unsubscribeUserSnaphot = userRef.onSnapshot((snapShot) => {
-          dispatch(
-            userActions.setCurrentUser({
-              id: snapShot.id,
-              ...snapShot.data(),
-            })
-          );
-        });
-      } else {
-        dispatch(userActions.setCurrentUser(null));
-      }
-    });
-
+    // let unsubscribeUserSnaphot;
+    // // dispatch(cartActions.hideCart());
+    // let unsubscribeAuth = auth.onAuthStateChanged(async (userAuth) => {
+    //   //
+    //   if (userAuth) {
+    //     const userRef = await createUserProfileDocument(userAuth);
+    //     unsubscribeUserSnaphot = userRef.onSnapshot((snapShot) => {
+    //       dispatch(
+    //         userActions.setCurrentUser({
+    //           id: snapShot.id,
+    //           ...snapShot.data(),
+    //         })
+    //       );
+    //     });
+    //   } else {
+    //     dispatch(userActions.setCurrentUser(null));
+    //   }
+    // });
     //
-    return () => {
-      unsubscribeAuth();
-      unsubscribeUserSnaphot();
-    };
+    // return () => {
+    //   unsubscribeAuth();
+    //   unsubscribeUserSnaphot();
+    // };
   }, [dispatch]);
 
   return (

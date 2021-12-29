@@ -88,20 +88,11 @@ export const convertCollectionsSnapshotToMap = (collections) => {
   }, {});
 };
 
-const googleProvider = new GoogleAuthProvider();
-// googleProvider.addScope("https://www.googleapis.com/auth/contacts.readonly");
-// googleProvider.setCustomParameters({
-//   prompt: "select_account",
-//   //   login_hint: "user@example.com",
-// });
+export const googleProvider = new GoogleAuthProvider();
+
 export const auth = getAuth();
 
-export const signInWithGoogle = () =>
-  signInWithPopup(auth, googleProvider).then((result) => {
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
-    const user = result.user;
-  });
+export const signInWithGoogle = () => signInWithPopup(auth, googleProvider);
 
 const fbProvider = new FacebookAuthProvider();
 // fbProvider.addScope("user_birthday");
