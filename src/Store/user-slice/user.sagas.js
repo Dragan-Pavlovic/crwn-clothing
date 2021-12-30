@@ -46,39 +46,12 @@ function* signInwithFacebook() {
 
 function* signInUser(user, additionalData = {}) {
   try {
-    console.log("from signIn saga", user, additionalData);
-    yield call(createUserProfileDocument, user, additionalData);
+    yield call(createUserProfileDocgiument, user, additionalData);
     // const userSnapshot = yield userRef.get();
     yield put(userActions.signInSuccess(user));
   } catch (err) {
     yield put(userActions.signInFailure(err));
   }
-}
-
-function* onGoogleSignInStart() {
-  yield takeLatest(userActions.googleSignInStart().type, signInWithGoogle);
-}
-
-function* onEmailSignInStart() {
-  yield takeLatest(userActions.emailSignInStart().type, signInWithEmail);
-}
-
-function* onFacebookLogin() {
-  yield takeLatest(userActions.facebookSignInStart().type, signInwithFacebook);
-}
-
-function* isUserAuthenticated() {
-  try {
-    const userAuth = yield getCurrentUser();
-    if (!userAuth) return;
-    yield signInUser(userAuth);
-  } catch (err) {
-    yield put(userActions.signInFailure(err));
-  }
-}
-
-function* onCheckUserSession() {
-  yield takeLatest(userActions.checkUserSession().type, isUserAuthenticated);
 }
 
 function* signOut() {
@@ -89,11 +62,6 @@ function* signOut() {
     yield put(userActions.signOutFailure());
   }
 }
-
-function* onSignoutStart() {
-  yield takeLatest(userActions.signOutStart, signOut);
-}
-
 function* signUpUser({ payload: { email, password, displayName } }) {
   try {
     const { user } = yield createUserWithEmailAndPassword(
@@ -111,6 +79,34 @@ function* signUpUser({ payload: { email, password, displayName } }) {
 }
 function* signInAfterSugnUpSuccess({ payload: { user, additionalData } }) {
   yield call(signInUser, user, additionalData);
+}
+function* isUserAuthenticated() {
+  try {
+    const userAuth = yield getCurrentUser();
+    if (!userAuth) return;
+    yield signInUser(userAuth);
+  } catch (err) {
+    yield put(userActions.signInFailure(err));
+  }
+}
+function* onGoogleSignInStart() {
+  yield takeLatest(userActions.googleSignInStart().type, signInWithGoogle);
+}
+
+function* onEmailSignInStart() {
+  yield takeLatest(userActions.emailSignInStart().type, signInWithEmail);
+}
+
+function* onFacebookLogin() {
+  yield takeLatest(userActions.facebookSignInStart().type, signInwithFacebook);
+}
+
+function* onCheckUserSession() {
+  yield takeLatest(userActions.checkUserSession().type, isUserAuthenticated);
+}
+
+function* onSignoutStart() {
+  yield takeLatest(userActions.signOutStart, signOut);
 }
 
 function* onSignUpSuccess() {
