@@ -30,7 +30,7 @@ function Header() {
         {currentUser ? (
           <div onClick={signOutHandler}>
             <Link className={classes.option} to="/">
-              SIGN OUT
+              SIGN OUT {currentUser.displayName}
             </Link>
           </div>
         ) : (

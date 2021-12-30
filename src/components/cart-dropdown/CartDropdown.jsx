@@ -20,11 +20,9 @@ const CartDropdown = () => {
   const goToCheckoutHandler = () => {
     history.push("/checkout");
   };
-  console.log("dropdown rendered");
 
   //listen for ESC keypress to close dropdown (remove listener when component unmounts)
   useEffect(() => {
-    console.log("dropdown mounted");
     const keyPressHandler = (e) => {
       if (e.key?.toLowerCase() === "escape" && isHidden === false) {
         dispatch(cartActions.toggleCartHidden());
@@ -32,8 +30,6 @@ const CartDropdown = () => {
     };
     document.addEventListener("keydown", keyPressHandler);
     return () => {
-      console.log("dropdown unmounted");
-
       document.removeEventListener("keydown", keyPressHandler);
     };
   }, [dispatch, isHidden]);

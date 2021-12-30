@@ -46,9 +46,11 @@ function* signInwithFacebook() {
 
 function* signInUser(user, additionalData = {}) {
   try {
-    yield call(createUserProfileDocgiument, user, additionalData);
-    // const userSnapshot = yield userRef.get();
-    yield put(userActions.signInSuccess(user));
+    const userRef = yield call(createUserProfileDocument, user, additionalData);
+    const snapShot = yield userRef.get();
+    const data = snapShot.data();
+    console.log(data);
+    yield put(userActions.signInSuccess({ ...user, ...data }));
   } catch (err) {
     yield put(userActions.signInFailure(err));
   }
@@ -69,7 +71,7 @@ function* signUpUser({ payload: { email, password, displayName } }) {
       email,
       password
     );
-    yield updateProfile(auth.user, { displayName });
+    yield updateProfile(auth.user);
     yield put(
       userActions.signUpSuccess({ user, additionalData: { displayName } })
     );

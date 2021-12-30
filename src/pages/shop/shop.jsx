@@ -13,13 +13,10 @@ export default function Shop() {
   const match = useRouteMatch();
   useEffect(() => {
     if (initial) {
-      console.log("fetching starts...");
-      // dispatch(collectionsActions.fetchCollectionStartsAsync());
       dispatch(collectionsActions.fetchCollectionsStarts());
       initial = false;
     }
   }, [dispatch]);
-  console.log("shoprenderd");
   return (
     <div>
       <Route exact path={`${match.path}`}>
