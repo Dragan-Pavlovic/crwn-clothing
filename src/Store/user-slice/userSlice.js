@@ -2,9 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   currentUser: null,
-  isLoading: false,
-  true: "",
-  false: "",
   error: "",
 };
 
@@ -16,25 +13,33 @@ const userSlice = createSlice({
       state.currentUser = action.payload;
     },
 
-    googleSignInStart(state) {
-      state.isLoading = true;
-    },
     signInSuccess(state, { payload }) {
       state.currentUser = payload;
       state.error = "";
-      state.isLoading = false;
     },
     signInFailure(state, { err }) {
       state.error = err;
-      state.isLoading = false;
     },
 
-    emailSignInStart(state) {
-      state.isLoading = true;
-      state.true = Date.now();
-    },
-
+    emailSignInStart() {},
     facebookSignInStart() {},
+    googleSignInStart() {},
+    checkUserSession() {},
+    signOutStart() {},
+    signOutSuccess(state) {
+      state.currentUser = null;
+      state.error = null;
+    },
+    signOutFailure(state, { payload }) {
+      state.error = payload;
+    },
+    signUpStart() {},
+    signUpSuccess(state, { user, additionalData }) {
+      state.currentUser = user;
+    },
+    signUpFailure(state, { payload }) {
+      state.error = payload;
+    },
   },
 });
 

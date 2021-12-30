@@ -21,15 +21,15 @@ const SignIn = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     dispatch(userActions.emailSignInStart({ ...state }));
-  };
-
-  const signInWithGoogleHandler = (e) => {
-    dispatch(userActions.googleSignInStart());
     dispatchUseFormAction({ type: "CLEAR" });
   };
 
+  const signInWithGoogleHandler = () => {
+    dispatch(userActions.googleSignInStart());
+  };
+
   const signInWithFacebookHandler = () => {
-    console.log("facebook");
+    dispatch(userActions.facebookSignInStart());
   };
 
   return (
@@ -61,7 +61,7 @@ const SignIn = () => {
           <Button type="submit">SIGN IN</Button>
 
           <Button
-            // type="button"
+            type="button"
             onClick={signInWithGoogleHandler}
             className={classes["button-google"]}
           >

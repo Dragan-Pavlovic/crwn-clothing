@@ -16,6 +16,10 @@ const cartSlice = createSlice({
       state.isHidden = true;
     },
 
+    clearCart(state) {
+      state.cartItems = [];
+    },
+
     addItemToCart(state, action) {
       const { id } = action.payload;
       const item = state.cartItems.find((item) => item.id === id);

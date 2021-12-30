@@ -1,13 +1,18 @@
-import { auth, createUserProfileDocument } from "../../firebase/firebase.utils";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useDispatch } from "react-redux";
 import useFormInput from "../../hooks/useFormInput";
+import { userActions } from "../../Store/user-slice/userSlice";
 import Button from "../UI/button/Button";
 import FormInput from "../UI/form-input/FormInput";
 import classes from "./SignUp.module.scss";
 
 const SignUp = () => {
-  const { state, dispatch, inputChangeHandler } = useFormInput(true);
-  const { email, password, confirmPassword, displayName } = state;
+  const dispatch = useDispatch();
+  const {
+    state: signUpFormState,
+    dispatch: dispatchUseFormAction,
+    inputChangeHandler,
+  } = useFormInput(true);
+  const { email, password, confirmPassword, displayName } = signUpFormState;
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -15,19 +20,8 @@ const SignUp = () => {
       alert(`passwords don't match`);
       return;
     }
-
-    try {
-      const { user } = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      await createUserProfileDocument(user, { displayName });
-
-      dispatch({ type: "CLEAR", isSignUp: true });
-    } catch (err) {
-      console.log(err);
-    }
+    dispatch(userActions.signUpStart({ email, password, displayName }));
+    dispatchUseFormAction({ type: "CLEAR", isSignUp: true });
   };
 
   return (

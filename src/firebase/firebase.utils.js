@@ -43,6 +43,16 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   }
 };
 
+//mimicing promise based checking for user session validity
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+      unsubscribe();
+      resolve(userAuth);
+    }, reject);
+  });
+};
+
 export const addCollectionAndDocuments = async (
   collectionKey,
   objectsToAdd
@@ -94,19 +104,9 @@ export const auth = getAuth();
 
 export const signInWithGoogle = () => signInWithPopup(auth, googleProvider);
 
-const fbProvider = new FacebookAuthProvider();
-// fbProvider.addScope("user_birthday");
+export const fbProvider = new FacebookAuthProvider();
 fbProvider.setCustomParameters({
   display: "popup",
 });
 
-export const signInWithFacebook = () =>
-  signInWithPopup(auth, fbProvider)
-    .then((result) => {})
-    .catch((error) => {
-      console.log(error);
-      // ...
-    });
 export default firebase;
-
-// console.log(firestore.collection("users"));

@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import classes from "./Header.module.scss";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
-import { auth } from "../../firebase/firebase.utils";
 import { useSelector } from "react-redux";
 import CartIcon from "../cart-icon/CartIcon";
 import CartDropdown from "../cart-dropdown/CartDropdown";
@@ -16,7 +15,7 @@ function Header() {
   const currentUser = useSelector(selectUser);
 
   const signOutHandler = () => {
-    dispatch(userActions.setCurrentUser(null));
+    dispatch(userActions.signOutStart());
   };
   return (
     <div className={classes.header}>
@@ -29,8 +28,10 @@ function Header() {
         </Link>
 
         {currentUser ? (
-          <div className={classes.option} onClick={signOutHandler}>
-            SIGN OUT
+          <div onClick={signOutHandler}>
+            <Link className={classes.option} to="/">
+              SIGN OUT
+            </Link>
           </div>
         ) : (
           <Link className={classes.option} to="/signin">
