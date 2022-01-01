@@ -17,4 +17,21 @@
       width: 90%;
     }
   }
+  @media screen and (max-width: 800px) {
+    align-items: center;
+    padding: 0 10px;
+    margin: 10px;
+    .items {
+      width: auto;
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+      grid-row-gap: 40px;
+      grid-column-gap: 15px;
+      & .collection-item {
+        margin-bottom: 0px;
+        width: 90%;
+      }
+    }
+  }
 }
