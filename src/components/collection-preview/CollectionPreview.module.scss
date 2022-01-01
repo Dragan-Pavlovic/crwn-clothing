@@ -1,7 +1,7 @@
 .collection-preview {
   display: flex;
   flex-direction: column;
-  margin-bottom: 30px;
+  margin-bottom: 70px;
 
   .title {
     font-size: 28px;
@@ -15,10 +15,12 @@
 
   @media screen and (max-width: 800px) {
     align-items: center;
+
     .preview {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-gap: 20px;
+      grid-row-gap: 40px;
+      grid-column-gap: 15px;
     }
   }
 }
