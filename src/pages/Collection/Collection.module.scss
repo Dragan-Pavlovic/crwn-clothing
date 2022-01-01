@@ -22,7 +22,7 @@
     padding: 0 10px;
     margin: 10px;
     .items {
-      width: auto;
+      width: 100%;
       display: grid;
 
       grid-template-columns: 1fr 1fr;
@@ -30,7 +30,7 @@
       grid-column-gap: 15px;
       & .collection-item {
         margin-bottom: 0px;
-        width: 90%;
+        width: 100%;
       }
     }
   }

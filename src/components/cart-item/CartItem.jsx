@@ -1,5 +1,5 @@
 import classes from "./CartItem.module.scss";
-
+import React from "react";
 const CartItem = ({ imageUrl, price, name, quantity }) => {
   const formatedPrice = `$${price.toFixed(2)}`;
   return (
@@ -15,4 +15,4 @@ const CartItem = ({ imageUrl, price, name, quantity }) => {
   );
 };
 
-export default CartItem;
+export default React.memo(CartItem);
