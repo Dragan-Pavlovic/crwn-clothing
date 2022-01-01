@@ -1,18 +1,17 @@
-//sagas
-import rootSaga from "./root.saga";
-
+//redux
 import { configureStore } from "@reduxjs/toolkit";
 import { userReducer } from "./user-slice/userSlice";
 import { cartReducer } from "./cart-slice/cartSlice";
 import { directoryReducer } from "./directory-slice/directorySlice";
 import { collecionsReducer } from "./collections-slice/collectionsSlice";
+
+//sagas
+import rootSaga from "./root.saga";
 import createSagaMiddleware from "@redux-saga/core";
 
 //redux persist
 import storage from "redux-persist/lib/storage";
 import { combineReducers } from "@reduxjs/toolkit";
-
-// import { persistStore, persistReducer } from "redux-persist";
 import {
   // FLUSH,
   // PAUSE,
@@ -24,6 +23,7 @@ import {
   // REHYDRATE,
 } from "redux-persist";
 
+//saga
 const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
@@ -58,9 +58,9 @@ export const store = configureStore({
 //           PURGE,
 //           REGISTER,
 //           "user/signInSuccess",
+
 //           "user/signInFailure",
 //         ],
 //       },
 sagaMiddleware.run(rootSaga);
-
 export const persistor = persistStore(store);
