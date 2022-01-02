@@ -2,8 +2,10 @@ import StripeCheckout from "react-stripe-checkout";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { cartActions } from "../../Store/cart-slice/cartSlice";
+import { useHistory } from "react-router-dom";
 
 const StripeCheckoutButton = ({ price }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const priceForStripe = price * 100;
   const publishableKey =
@@ -19,8 +21,9 @@ const StripeCheckoutButton = ({ price }) => {
       },
     })
       .then((res) => {
-        alert("Payment successful");
         dispatch(cartActions.clearCart());
+        alert("Payment successful");
+        history.push("/");
       })
       .catch((err) => {
         console.log(err);
