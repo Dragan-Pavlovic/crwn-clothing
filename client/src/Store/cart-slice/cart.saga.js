@@ -12,9 +12,7 @@ function* onSignOutSuccess() {
     clearCartOnSignOutSuccess
   );
 }
-function* onAddToCart (){
-  yield takeEvery(cartActions.addItemToCart().type,)
-}
+
 
 export function* cartSagas() {
   yield all([call(onSignOutSuccess)]);
