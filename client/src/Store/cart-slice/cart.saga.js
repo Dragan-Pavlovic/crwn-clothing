@@ -1,4 +1,4 @@
-import { call, all, takeLatest,takeEvery put } from "redux-saga/effects";
+import { call, all, takeLatest, put } from "redux-saga/effects";
 import { userActions } from "../user-slice/userSlice";
 import { cartActions } from "./cartSlice";
 
@@ -13,8 +13,6 @@ function* onSignOutSuccess() {
   );
 }
 
-
 export function* cartSagas() {
   yield all([call(onSignOutSuccess)]);
-  
 }
