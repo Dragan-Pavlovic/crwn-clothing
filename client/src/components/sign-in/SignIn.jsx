@@ -28,9 +28,9 @@ const SignIn = () => {
     dispatch(userActions.googleSignInStart());
   };
 
-  // const signInWithFacebookHandler = () => {
-  //   dispatch(userActions.facebookSignInStart());
-  // };
+  const signInWithFacebookHandler = () => {
+    dispatch(userActions.facebookSignInStart());
+  };
 
   return (
     <div className={classes["sign-in"]}>
@@ -68,13 +68,13 @@ const SignIn = () => {
             SIGN IN WITH GOOGLE
           </Button>
         </div>
-        {/* <Button
+        <Button
           type="button"
           className={classes["button-facebook"]}
           onClick={signInWithFacebookHandler}
         >
           LOGIN WITH FB
-        </Button> */}
+        </Button>
       </form>
     </div>
   );
